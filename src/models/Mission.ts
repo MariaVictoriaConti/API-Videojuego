@@ -8,7 +8,7 @@ enum MissionType {
 
 // https://www.typescriptlang.org/docs/handbook/enums.html
 
-class Mission {
+export class Mission {
     private _description: string;
     private _difficulty: number;
     private _reward: number;

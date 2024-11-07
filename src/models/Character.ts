@@ -1,6 +1,6 @@
 // faltan setters
 
-class Character {
+export class Character {
     private _name: string;
     private _level: number;
     private _health: number;
