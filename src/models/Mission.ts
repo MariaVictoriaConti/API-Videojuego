@@ -12,13 +12,10 @@ export class Mission {
     private _description!: string;
     private _difficulty!: number;
     private _reward!: number;
-    private _typeMission: MissionType;
+    private _typeMission!: MissionType;
 
-    constructor(typeMission: MissionType) {
-        this._description;
-        this._difficulty;
-        this._reward;
-        this._typeMission = typeMission;
+    constructor() {
+        //elimino los this. que no precisan ser inicializados
     }
 
     public get description(): string {
@@ -37,13 +34,13 @@ export class Mission {
         return this._typeMission;
     }
 
-    // Prueba de setter
-    public set detalleMisionElegida(value: MissionType) { // yo le cambiaria a detalles de la mision y el asignar se lo haria al class Character
-        if (value === MissionType.Main) {
+    public set setTypeMission(value:MissionType){
+        this._typeMission = value;
+        if (this._typeMission === MissionType.Main) {
             this._description = "bla bla bla"
             this._difficulty = 30
             this._reward = 20
-        } else if (value === MissionType.Side) {
+        } else if (this._typeMission === MissionType.Side) {
             this._description = "blablabla"
             this._difficulty = 10
             this._reward = 5
@@ -52,10 +49,16 @@ export class Mission {
             this._difficulty = 5
             this._reward = 1
         }
-        console.log(`Tu misión es: ${this.description}, con dificultad de ${this._difficulty} y una recompensa de ${this._reward}`);
+        console.log(`${this.description}, con dificultad de ${this._difficulty} y una recompensa de ${this._reward}`);
     }
+
 }
 
-const mision1 = new Mission(MissionType.Side)
-mision1.detalleMisionElegida = MissionType.Side
+const mision1 = new Mission()
+//mision1.setTypeMission = MissionType.Main
+//console.log(mision1.description);
+//console.log(mision1.difficulty);
+//console.log(mision1.reward);
+
+
 

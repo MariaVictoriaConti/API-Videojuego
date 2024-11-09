@@ -1,24 +1,31 @@
 // faltan setters
 import { MissionType, Mission } from "./Mission";
 
-export class Character extends Mission{
+//Agrego poderes para el inventario
+export enum PODERES {
+    SUPERSALTO = "SUPERSALTO",
+    SUPERVELOCIDAD = "SUPERVELOCIDAD",
+    PIZZABOOMERANG = "PIZZABOOMERANG",
+}
+
+//En vez de heredar use la clase mission directamente, como q la instancie dentro de un atributo
+export class Character {
     private _name: string;
     private _level: number;
     private _health: number;
     private _experience: number;
-    private _inventory: string[];
-    public _listaMisiones!: string[];
+    public _inventory: string[];
+     public _listaMisiones: string[];
 
 
-    constructor(name: string, level: number, health: number, experience: number,typeMission: MissionType){
-        super(typeMission)
+    constructor(name: string) {
+
         this._name = name;
-        this._level = level;
-        this._health = health;
-        this._experience = experience;
+        this._level = 1;
+        this._health = 100;
+        this._experience = 0;
         this._inventory = [];
-        this._listaMisiones! = [];
-
+         this._listaMisiones = []; 
     }
 
     public get name(): string {
@@ -41,19 +48,39 @@ export class Character extends Mission{
         return this._inventory;
     }
 
-public set asignarMision(value: MissionType) {
-    super.detalleMisionElegida
-    this._listaMisiones.push(value)
+    public set name(value:string){
+          this._name = value;
+    }
+    public set level(value:number){
+        this._level = value;
+  }
+  public set health(value:number){
+    this._health = value;
+}
+public set experience(value:number){
+    this._experience = value;
 }
 
-public get listarMisiones():string[]{
-    return this._listaMisiones;
+public set inventory(value:string[]){
+    this._inventory = [];
+}
+public set listaMisiones(value:string){
+    this.name = value;
 }
 
-
 }
 
-//VER PORQUE AL CREAR PERSONAJE PONEMOS UN TYPEMISSION Y NO LO TOMA Y SI TOMA AL MOMENTO DE A
-const personaje1 = new Character("coco", 1, 100, 20, MissionType.Side)
-personaje1.asignarMision = MissionType.Event
-console.log(personaje1.listarMisiones)
+//VER PORQUE AL CREAR PERSONAJE PONEMOS UN TYPEMISSION Y NO LO TOMA Y SI TOMA AL MOMENTO DE A===> resuelto!
+ const personaje1 = new Character("coco")
+//  console.log(personaje1); 
+// personaje1.asignarMision(MissionType.Main);
+// personaje1.asignarMision(MissionType.Side)
+// console.log(personaje1.listarMisiones)
+// personaje1.inventory = PODERES.PIZZABOOMERANG
+// console.log(personaje1.listarMisiones)
+// console.log(personaje1);
+
+// personaje1.inventory = PODERES.PIZZABOOMERANG
+
+
+
