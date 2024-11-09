@@ -1,6 +1,6 @@
 // falta setters y conectar con enum
 
-enum MissionType {
+export enum MissionType {
     Main = "Main",
     Side = "Side",
     Event = "Event",
@@ -9,15 +9,15 @@ enum MissionType {
 // https://www.typescriptlang.org/docs/handbook/enums.html
 
 export class Mission {
-    private _description: string;
-    private _difficulty: number;
-    private _reward: number;
+    private _description!: string;
+    private _difficulty!: number;
+    private _reward!: number;
     private _typeMission: MissionType;
 
-    constructor(description: string, difficulty: number, reward: number, typeMission: MissionType) {
-        this._description = description;
-        this._difficulty = difficulty;
-        this._reward = reward;
+    constructor(typeMission: MissionType) {
+        this._description;
+        this._difficulty;
+        this._reward;
         this._typeMission = typeMission;
     }
 
@@ -38,7 +38,7 @@ export class Mission {
     }
 
     // Prueba de setter
-    public set asignarMision(value: MissionType) {
+    public set detalleMisionElegida(value: MissionType) { // yo le cambiaria a detalles de la mision y el asignar se lo haria al class Character
         if (value === MissionType.Main) {
             this._description = "bla bla bla"
             this._difficulty = 30
@@ -52,6 +52,10 @@ export class Mission {
             this._difficulty = 5
             this._reward = 1
         }
-        console.log(`Tu misón es: ${this.description}, con dificultad de ${this._difficulty} y una recompensa de ${this._reward}`);
+        console.log(`Tu misión es: ${this.description}, con dificultad de ${this._difficulty} y una recompensa de ${this._reward}`);
     }
 }
+
+const mision1 = new Mission(MissionType.Side)
+mision1.detalleMisionElegida = MissionType.Side
+
