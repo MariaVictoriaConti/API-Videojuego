@@ -68,10 +68,27 @@ public set listaMisiones(value:string){
     this.name = value;
 }
 
+public atacarContrincante():void{
+    console.log(`${this.name} ataca..`);    
+}
+public recibirAtaqueSinDefensa():void{
+
+    if(this.health <= 0){            
+        console.log("El enemigo ha sido derrotado!!");            
+    }else if(this.health > 0){
+        this.health -= 30;        
+        console.log(`${this.name} es atacado desprevenidamente.. y su salud disminuye a ${this.health}..`);
+        console.log(this.health);
+
+    }
+}
+public recibirAtaqueConDefensa():void{
+    console.log(`${this.name} es atacado pero se defiende y no afecta su salud.`);
+}
 }
 
 //VER PORQUE AL CREAR PERSONAJE PONEMOS UN TYPEMISSION Y NO LO TOMA Y SI TOMA AL MOMENTO DE A===> resuelto!
- const personaje1 = new Character("coco")
+//const personaje1 = new Character("coco")
 //  console.log(personaje1); 
 // personaje1.asignarMision(MissionType.Main);
 // personaje1.asignarMision(MissionType.Side)
