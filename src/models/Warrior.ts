@@ -37,24 +37,18 @@ export class Warrior extends Character {
         this._defensa = value;
     } 
     
-    public ataque():void{
-        console.log(`${this.name} lanza su ataque con ${this._superPoder}..`);        
-    }
+public atacarContrincante(): void {
+    super.atacarContrincante()
+}
 
-    public recibirAtaqueSinDefensa():void{
+public recibirAtaqueSinDefensa(): void {
+    super.recibirAtaqueSinDefensa()
+    
+}
 
-        if(this.health <= 0){            
-            console.log("El enemigo ha sido derrotado!!");            
-        }else if(this.health > 0){
-            this.health -= 30;        
-            console.log(`${this.name} es atacado desprevenidamente.. y su salud disminuye a ${this.health}..`);
-            console.log(this.health);
-
-        }
-    }
-    public recibirAtaqueConDefensa():void{
-        console.log(`${this.name} es atacado pero se defiende y no afecta su salud.`);
-    }
+public recibirAtaqueConDefensa(): void {
+    super.recibirAtaqueConDefensa()
+}
 
 }
 

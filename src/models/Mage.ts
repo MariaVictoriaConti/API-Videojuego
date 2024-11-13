@@ -1,9 +1,9 @@
 import { Character } from './Character'
 
 export enum PODERMAGICO {
-    congelamiento, 
-    quitaVision, 
-    fatalati,
+    uno = "congelamiento", 
+    dos = "quitaVision", 
+    tres = "fatalati",
 }
 // const elegirPoder = Math.random()
 // elegirPoder (): PODERMAGICO {
@@ -39,16 +39,16 @@ public set mana(value : number) {
     this._mana = value;
 }
 
-
-    public ataqueConPoderMagico():void{
-        if(this._mana >= 30 && this._mana <= 49){
-            console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.congelamiento} que disminuye en 30 la salud del rival..`);    
-        }else if(this._mana >49 && this._mana <= 69){
-            console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.quitaVision} que disminuye en 60 la salud del rival..`);            
-        }else if(this._mana > 69){
-            console.log(`${this.name} lanza un ataque Magico ${PODERMAGICO.fatalati} que derrota al rival eliminando toda su salud en un solo hechizo..`);            
-        }
+public atacarContrincante(): void {
+    if(this._mana >= 30 && this._mana <= 49){
+        console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.uno} que disminuye la salud del rival..`);    
+    }else if(this._mana >49 && this._mana <= 69){
+        console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.dos} que disminuye la salud del rival..`);            
+    }else if(this._mana > 69){
+        console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.tres} que derrota al rival eliminando toda su salud en un solo hechizo..`);            
     }
+
+}
 
     public recibirAtaqueSinDefensa():void{
         console.log(`${this.name} es atacado desprevenidamente.. y su salud y mana disminuye..`);
@@ -56,7 +56,7 @@ public set mana(value : number) {
             this.health -= 30;      
             this._mana -= 20;  
         }else if(this.health <= 0){
-            console.log(`${this.name} ha sido derrotado.`);            
+            console.log(`${this.name} ha sido derrotado. SUPERASTE LA MISION!`);            
         }
     }
 
@@ -66,7 +66,7 @@ public set mana(value : number) {
 
 }
 
-const mage = new Mage("Donkey Kong", PODERMAGICO.congelamiento)
+//const mage = new Mage("Donkey Kong", PODERMAGICO.uno)
 
 
 

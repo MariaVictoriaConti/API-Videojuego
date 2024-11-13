@@ -2,9 +2,9 @@
 ///Importamos td
 import { Mission, MissionType } from "../models/Mission";
 import { Character, PODERES } from "../models/Character";
-import { Mage, PODERMAGICO } from "../models/Mage";
+import { Mage, PODERMAGICO  } from "../models/Mage";
 import { Warrior, DEFENSA, SUPERPODER } from "../models/Warrior";
-import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacter, asignarMision, listarMisiones, asignarPoderApersonaje,  } from "../controllers/gameController";
+import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, asignarEnemigo,  } from "../controllers/gameController";
 
 
 
@@ -31,27 +31,44 @@ asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
 // asignarPoderApersonaje(PODERES.SUPERSALTO, "Luigi")
 // asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
 
+//Actualizo algun dato del personaje creado
+upDateCharacterOK("Mario", "name", "Luigi")
+console.log(Mario);
+
+
+
 //Ahora le debes asignar una mision al personaje elegido para jugar:
 asignarMision(MissionType.Main, "Mario")
 // asignarMision(MissionType.Event, "Mario")
 // asignarMision(MissionType.Side, "Luigi")
 
+const enemigo = asignarEnemigo(MissionType.Main);
+
+Mario.atacarContrincante();
+enemigo?.recibirAtaqueSinDefensa()
+
+Mario.atacarContrincante();
+enemigo?.recibirAtaqueSinDefensa()
+
+enemigo?.atacarContrincante()
+Mario.recibirAtaqueSinDefensa()
+
+Mario.atacarContrincante();
+enemigo?.recibirAtaqueSinDefensa()
+
+enemigo?.atacarContrincante()
+Mario.recibirAtaqueConDefensa()
+
+Mario.atacarContrincante();
+enemigo?.recibirAtaqueSinDefensa()
+
+
+
 
 //COMO HACER PARA CONECTAR MISION QUE SE ASIGNA CON EL ENEMIGO QUE TIENE ESA MISION?? DNDE PONEMOS UN IF? O COMO HACEMOS? ------------>BERNI
 
-const enemigo = new Warrior("Bowser", SUPERPODER.LANZAFUEGO, DEFENSA.CAPARAZONPROTECTOR)
 
-Mario.atacarContrincante();
 console.log("-------------------------");
-
-console.log(enemigo);
-enemigo.recibirAtaqueSinDefensa()
-console.log(enemigo);
-enemigo.ataque();
-console.log("-------------------------");
-
-Mario.recibirAtaqueSinDefensa()
-console.log(Mario);
 
 
 

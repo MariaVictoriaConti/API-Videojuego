@@ -1,6 +1,7 @@
 import { Character, PODERES } from "../models/Character";
 import { Warrior , SUPERPODER, DEFENSA} from "../models/Warrior";
 import { Mission, MissionType } from "../models/Mission";
+import { Mage , PODERMAGICO} from "../models/Mage";
 
 
 export let characters: Character[] = [];
@@ -33,6 +34,7 @@ export function deleteCharacter(personaje: string){
 }
 
 //CAMBIAR SOLO NOMBRE O CAMBIAR TODOS LOS ATRIBUTOS TIPO RESETAR?
+/*
 export function upDateCharacter(personajeAbuscar:string, nuevoNombre:string){
 
 const personajeBuscado = characters.find(value => value.name === personajeAbuscar)
@@ -43,27 +45,43 @@ console.log(`Se actualizo el nombre de ${personajeAbuscar} por ${nuevoNombre}`);
 }else{
     console.log("No encontramos el personaje para actualizar sus datos.");    
 }
+}*/
+
+export function upDateCharacterOK<T extends keyof Character>(personajeAbuscar:string, atributo:T, nuevoValor:Character[T]):void{
+    const personajeBuscadoOK = characters.find(value => value.name === personajeAbuscar)
+    if(personajeBuscadoOK){
+personajeBuscadoOK[atributo] = nuevoValor;
+console.log(`Se ha actualizado el atributo ${atributo} por el valor: ${nuevoValor}.`);
+
+        }else{
+            console.log("No encontramos el personaje para actualizar sus datos.");    
+        }
 }
 
 //Gestion misiones
-export function asignarMision(value: MissionType, nombrePersonaje:string): void {
+export function asignarMision(value: MissionType, nombrePersonaje:string){
     let personaje = characters.find(personaje => personaje.name === nombrePersonaje)
-    console.log(nombrePersonaje + ", tu mision es: ")    
-    let mision = new Mission().setTypeMission = value
-    if(mision === MissionType.Main){
-        
-        // let Bowser = new Warrior("Bowser", SUPERPODER.LANZAFUEGO, DEFENSA.CAPARAZONPROTECTOR)
-        console.log("Bowser esta preparado para la batalla..");            
-    }
 
     if (personaje){
-        personaje._listaMisiones.push(mision);
+        console.log(nombrePersonaje + ", tu mision es: ") 
+        let mision = new Mission().setTypeMission = value;
+        personaje._listaMisiones.push(mision);   
+        return mision;
     }else{
         console.log("No existe personaje con ese nombre para asignarle la mision.");
-        
     }
-     
 }
+export function asignarEnemigo(value:MissionType){
+if(value === MissionType.Side){
+    const DonkeyKong = new Mage ("Donkey Kong", PODERMAGICO.uno)
+    return DonkeyKong;
+}else if(value === MissionType.Main){
+    const Bowser = new Warrior ("Bowser",SUPERPODER.LANZAFUEGO, DEFENSA.CAPARAZONPROTECTOR)
+    return Bowser;
+}
+}
+
+
 
 export function listarMisiones(personaje:string) {
     let personajeBuscado = characters.find(character => character.name === personaje)
