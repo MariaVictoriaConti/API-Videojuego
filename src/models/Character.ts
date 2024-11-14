@@ -9,7 +9,7 @@ export enum PODERES {
 }
 
 //En vez de heredar use la clase mission directamente, como q la instancie dentro de un atributo
-export class Character {
+export class Character{
     private _name: string;
     private _level: number;
     private _health: number;
@@ -70,20 +70,32 @@ public set listaMisiones(value:string){
 }
 
 public atacarContrincante():void{
-    console.log(`${this.name} ataca..`);    
+    console.log(`${this.name} ataca..`);
+    this._health -= 20
+    if(this.health<=0){
+        console.log(this.name + "GAME OVER");        
+    }   else{
+        console.log(this._name +" pierde 20 de salud por atacar. Su salud actual es: " + this._health);        
+    } 
 }
 public recibirAtaqueSinDefensa():void{
-    if(this.health < 29){            
-        console.log(`${this._name} ha sido derrotado!`);            
+    if(this.health <= 0){            
+        console.log(`${this._name} has sido derrotado!`); 
+        console.log(this.name + ": GAME OVER");
+        
+
     }else if(this.health >= 29){
         this.health -= 30;        
         console.log(`${this.name} es atacado desprevenidamente.. y su salud disminuye a ${this.health}..`);
-        console.log(this.health);
-
     }
 }
 public recibirAtaqueConDefensa():void{
-    console.log(`${this.name} es atacado pero se defiende y no afecta su salud.`);
+    if(this._health>=0){
+        console.log(`${this.name} es atacado pero se defiende y no afecta su salud.`);
+    }else{
+        console.log("game over");
+        
+    }
 }
 }
 

@@ -4,7 +4,8 @@ import { Mission, MissionType } from "../models/Mission";
 import { Character, PODERES } from "../models/Character";
 import { Mage, PODERMAGICO  } from "../models/Mage";
 import { Warrior, DEFENSA, SUPERPODER } from "../models/Warrior";
-import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, asignarEnemigo,  } from "../controllers/gameController";
+import { Enemy } from "../models/Enemy";
+import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, completeMission } from "../controllers/gameController";
 
 
 
@@ -23,7 +24,7 @@ console.log("\nBienvenidos a SUPER MARIO BROUSS! \nPara comenzar deber crear el 
 
 
 //Creamos 2 personajes distintos
-const Mario = createCharacter("Mario")
+const personaje = createCharacter("Mario")
 //createCharacter("Luigi")
 
 //Ahora elegimos el superPoder que se sumara al inventario y utilizaras en la mision:
@@ -32,37 +33,38 @@ asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
 // asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
 
 //Actualizo algun dato del personaje creado
-upDateCharacterOK("Mario", "name", "Luigi")
-console.log(Mario);
+//upDateCharacterOK("Mario", "name", "Luigi")
+console.log(personaje);
+
 
 
 
 //Ahora le debes asignar una mision al personaje elegido para jugar:
-asignarMision(MissionType.Main, "Mario")
+const mision = asignarMision(MissionType.Main, "Mario")
 // asignarMision(MissionType.Event, "Mario")
 // asignarMision(MissionType.Side, "Luigi")
 
-const enemigo = asignarEnemigo(MissionType.Main);
+const enemigo = new Enemy("Bowser", "LanzaLLAMA", 100, "CAPARAZON")
 
-Mario.atacarContrincante();
-enemigo?.recibirAtaqueSinDefensa()
+personaje.atacarContrincante();
+enemigo.recibirAtaqueSinDefensa()
 
-Mario.atacarContrincante();
-enemigo?.recibirAtaqueSinDefensa()
+personaje.atacarContrincante();
+enemigo.recibirAtaqueSinDefensa()
 
-enemigo?.atacarContrincante()
-Mario.recibirAtaqueSinDefensa()
+personaje.atacarContrincante()
+enemigo.recibirAtaqueSinDefensa()
 
-Mario.atacarContrincante();
-enemigo?.recibirAtaqueSinDefensa()
+personaje.atacarContrincante()
+enemigo.recibirAtaqueSinDefensa()
 
-enemigo?.atacarContrincante()
-Mario.recibirAtaqueConDefensa()
+if(mision !== undefined){
+    completeMission(personaje, mision, enemigo)
 
-Mario.atacarContrincante();
-enemigo?.recibirAtaqueSinDefensa()
+}
 
 
+console.log(personaje);
 
 
 //COMO HACER PARA CONECTAR MISION QUE SE ASIGNA CON EL ENEMIGO QUE TIENE ESA MISION?? DNDE PONEMOS UN IF? O COMO HACEMOS? ------------>BERNI
