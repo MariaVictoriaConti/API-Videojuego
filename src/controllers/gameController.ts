@@ -1,13 +1,13 @@
 import { Character, PODERES } from "../models/Character";
-import { Warrior, SUPERPODER, DEFENSA } from "../models/Warrior";
 import { Mission, MissionType } from "../models/Mission";
-import { Mage, PODERMAGICO } from "../models/Mage";
 import { Enemy } from "../models/Enemy";
 
 
+// Gestion de personajes
 export let characters: Character[] = [];
 //let listaMisiones: string[] = [];
 
+// Funcion para crear un personaje nuevo
 export function createCharacter(name: string,) {
     const character = new Character(name);
     characters.push(character);
@@ -15,6 +15,7 @@ export function createCharacter(name: string,) {
     return character;
 }
 
+// Funcion para mostrar la lista de personajes creados
 export function listCharacters() {
     console.log('Listado de personajes: ');
     characters.forEach(character => {
@@ -22,13 +23,12 @@ export function listCharacters() {
     })
 }
 
+// Funcion para eliminar personajes por su nombre
 export function deleteCharacter(personaje: string) {
     const indexCharacter = characters.findIndex(character => character.name === personaje)
     if (indexCharacter !== -1) {
         characters.splice(indexCharacter, 1);
         console.log(`Se ha eliminado ${personaje} de la lista de personajes creados.\n`);
-
-
     } else {
         console.log("No existe personaje con ese nombre");
     }
@@ -48,56 +48,52 @@ console.log(`Se actualizo el nombre de ${personajeAbuscar} por ${nuevoNombre}`);
 }
 }*/
 
+// Funcion que permite cambiar atributos de un personaje
 export function upDateCharacterOK<T extends keyof Character>(personajeAbuscar: string, atributo: T, nuevoValor: Character[T]): void {
     const personajeBuscadoOK = characters.find(value => value.name === personajeAbuscar)
     if (personajeBuscadoOK) {
         personajeBuscadoOK[atributo] = nuevoValor;
         console.log(`Se ha actualizado el atributo ${atributo} por el valor: ${nuevoValor}.`);
-
     } else {
         console.log("No encontramos el personaje para actualizar sus datos.");
     }
 }
 
-//Gestion misiones
+//Gestion de misiones
+
+// Funcion para asignar una mision nueva a un personaje
 export function asignarMision(value: MissionType, nombrePersonaje: string){
     let personaje = characters.find(personaje => personaje.name === nombrePersonaje)
     let mision = new Mission(value);
-   
+
     if (personaje) {
         console.log("Mision creada y asignada a: " + personaje.name + ".");        
         mision.setDetallesMision();
-       
         console.log(nombrePersonaje + ", tu mision es: " + mision.description)
         personaje._listaMisiones.push(mision.typeMission);
         console.log(mision);
-        
         return mision;
-    } else if (personaje) {
-        
+    } else if (!personaje) {
         console.log("No existe personaje con ese nombre para asignarle la mision.")
     } 
 }
 
+// Funcion para completar misiones
 export function completeMission(personaje: Character, mision: Mission, enemy: Enemy) {
-  
-        if (enemy.health <= 0) {
-            personaje.level += 1;
-        }
-        if (personaje.level >= mision.difficulty) {
-            console.log("Mision " + mision.typeMission + " completada con exito!");
-            personaje.health += mision.reward
-            personaje.experience += mision.reward
-            console.log(`Sumaste ${personaje.experience} a tu experiencia.`);
-        } else {
-            console.log("Aun no completaste la mision " + mision.typeMission);    
-        }
+    if (enemy.health <= 0) {
+        personaje.level += 1;
     }
-    
+    if (personaje.level >= mision.difficulty) {
+        console.log("Mision " + mision.typeMission + " completada con exito!");
+        personaje.health += mision.reward
+        personaje.experience += mision.reward
+        console.log(`Sumaste ${personaje.experience} a tu experiencia.`);
+    } else {
+        console.log("Aun no completaste la mision " + mision.typeMission);    
+    }
+}
 
-
-
-
+// Funcion para mostrar la lista de las misiones que tiene un personaje
 export function listarMisiones(personaje: string) {
     let personajeBuscado = characters.find(character => character.name === personaje)
     if (personajeBuscado) {
@@ -107,7 +103,7 @@ export function listarMisiones(personaje: string) {
     }
 }
 
-//gestion INVENTARIO / Poderes / Armas
+// Funcion para la gestion de inventario
 export function asignarPoderApersonaje(poder: PODERES, personaje: string) {
     let personajeBuscado = characters.find(value => value.name === personaje);
     if (personajeBuscado) {
@@ -124,12 +120,12 @@ export function asignarPoderApersonaje(poder: PODERES, personaje: string) {
 }
 
 
-const personaje2 = createCharacter("luigi")
+// const personaje2 = createCharacter("luigi")
 
-listCharacters()
+// listCharacters()
 
-asignarMision(MissionType.Main, "luigi")
-console.log(personaje2._listaMisiones);
+// asignarMision(MissionType.Main, "luigi")
+// console.log(personaje2._listaMisiones);
 
 
 /*
