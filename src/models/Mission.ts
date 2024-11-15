@@ -1,27 +1,22 @@
-// falta setters y conectar con enum
-
-import { Enemy } from "./Enemy";
-
-
+// Enum para elegir el tipo de mision
 export enum MissionType {
     Main = "Main",
     Side = "Side",
     Event = "Event",
 }
-
-// https://www.typescriptlang.org/docs/handbook/enums.html
-
+// Creacion de clase Mission
 export class Mission {
     private _description!: string;
     private _difficulty!: number;
     private _reward!: number;
     private _typeMission!: MissionType;
 
+// Para inicializarla solo usamos el tipo de mision
     constructor(tipo:MissionType) {
-        //elimino los this. que no precisan ser inicializados
         this._typeMission = tipo;
     }
 
+// Metodos getter
     public get description(): string {
         return this._description;
     }
@@ -38,38 +33,44 @@ export class Mission {
         return this._typeMission;
     }
 
-public set typeMission(value:MissionType){
-    this._typeMission = value;
-}
-public set description(value:string){
-    this._description= value;
-}
-public set difficulty(value:number){
-    this._difficulty = value;
-}
-public set reward(value:number){
-    this._reward = value;
-}
+// Metodos setter
+    public set typeMission(value:MissionType){
+        this._typeMission = value;
+    }
 
-public setDetallesMision(){
-    if (this.typeMission == MissionType.Main) {
-        this._description = "Derrotar a Bowser para rescatar a la Princesa Peach."
-        this._difficulty = 2
-        this._reward = 10
+    public set description(value:string){
+        this._description= value;
+    }
 
-    } else if (this.typeMission === MissionType.Side) {
-        this._description = "Derrotar a Donkey Kong que intenta tomar el poder total del reino Champignon y destruir a todo el pueblo."
-        this._difficulty = 3
-        this._reward = 20
+    public set difficulty(value:number){
+        if (value > 0) {
+            this._difficulty = value;
+        }
+    }
 
-    } else if (this.typeMission === MissionType.Event) {
-        this._description = "Recolectar la mayor cantidad de estrellas posibles que te daran energia para completar tu salud al 100% y poder derrotar a los archienemigos en las otras misiones."
-        this._difficulty = 4
-        this._reward = 30
+    public set reward(value:number){
+        if (value > 0) {
+            this._reward = value;
+        }
+    }
 
+    // Metodo para ver los detalles de las misiones disponibles
+    public setDetallesMision(){
+        if (this.typeMission == MissionType.Main) {
+            this._description = "Derrotar a Bowser para rescatar a la Princesa Peach."
+            this._difficulty = 2
+            this._reward = 10
+        } else if (this.typeMission === MissionType.Side) {
+            this._description = "Derrotar a Donkey Kong que intenta tomar el poder total del reino Champignon y destruir a todo el pueblo."
+            this._difficulty = 3
+            this._reward = 20
+        } else if (this.typeMission === MissionType.Event) {
+            this._description = "Recolectar la mayor cantidad de estrellas posibles que te daran energia para completar tu salud al 100% y poder derrotar a los archienemigos en las otras misiones."
+            this._difficulty = 4
+            this._reward = 30
+        }
     }
 }
-
 
 
 /*
@@ -87,16 +88,9 @@ public setDetallesMision(){
             this._difficulty = 4
             this._reward = 30
         }
-         console.log(`${this.description}. Dificultad: ${this._difficulty}. Recompensa: ${this._reward}.\n`);
+        console.log(`${this.description}. Dificultad: ${this._difficulty}. Recompensa: ${this._reward}.\n`);
     }
 */
-}
-
-
-
-
-
-
 
 
 //const mision1 = new Mission()
@@ -104,6 +98,3 @@ public setDetallesMision(){
 //console.log(mision1.description);
 //console.log(mision1.difficulty);
 //console.log(mision1.reward);
-
-
-
