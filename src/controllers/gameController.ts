@@ -1,7 +1,7 @@
 import { Character, PODERES } from "../models/Character";
 import { Mission, MissionType } from "../models/Mission";
 import { Enemy } from "../models/Enemy";
-
+import { sumar10Salud } from "../utils/helpers";
 
 // Gestion de personajes
 export let characters: Character[] = [];
@@ -118,6 +118,41 @@ export function asignarPoderApersonaje(poder: PODERES, personaje: string) {
         console.log("No hay personajes con ese nombre.\n");
     }
 }
+
+// Funcion para elegir entre uno u otro evento
+// function randomEvent(){
+//     const events = ["Come hongo y gana 10 de salud", "Junta Estrellas y gana puntos de experiencia"]
+//     const random = events[Math.floor(Math.random() * events.length)]
+//     return random;
+// }
+
+
+export async function evento(): Promise<string> {
+    return new Promise((resolve) => {
+        const evento = 'Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.'
+        setInterval(() => resolve(evento), 2000)
+        //sumar10Salud(personaje);
+    })
+}
+// const eventoSorpresa = "Come hongo y gana 10 de salud."
+export async function triggerEvent(personaje: Character): Promise<void> {
+    try {
+        console.log('Evento sorpresa!');
+        const resultado = await evento();
+        let sumarPuntos = await sumar10Salud(personaje)
+        console.log(resultado);
+        console.log(personaje);
+        
+    } catch (error) {
+        console.log('Ocurrio un error: ', error);
+    } finally {
+        console.log('Evento sorpresa finalizado.');
+    }
+}
+const Mario = new Character('Mario')
+console.log(Mario);
+triggerEvent(Mario);
+
 
 
 // const personaje2 = createCharacter("luigi")
