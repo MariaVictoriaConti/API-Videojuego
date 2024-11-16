@@ -37,8 +37,6 @@ asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
 console.log(personaje);
 
 
-
-
 //Ahora le debes asignar una mision al personaje elegido para jugar:
 const mision = asignarMision(MissionType.Main, "Mario")
 // asignarMision(MissionType.Event, "Mario")
@@ -60,7 +58,6 @@ enemigo.recibirAtaqueSinDefensa()
 
 if(mision !== undefined){
     completeMission(personaje, mision, enemigo)
-
 }
 
 
