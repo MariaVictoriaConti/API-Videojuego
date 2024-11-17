@@ -72,3 +72,4 @@ public get poder(): string {
     }
 }
 export const Bowser = new Enemy("Bowser", "LANZAFUEGO", 100, "CAPARAZON PROTECTOR");
+export const DonkeyKong = new Enemy("Donkey Kong", "FUERZASUPREMA", 100, "ESCUDO");

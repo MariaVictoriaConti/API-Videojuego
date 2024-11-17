@@ -5,7 +5,7 @@ import { Character, PODERES } from "../models/Character";
 import { Mage, PODERMAGICO  } from "../models/Mage";
 import { Warrior, DEFENSA, SUPERPODER } from "../models/Warrior";
 import { Enemy } from "../models/Enemy";
-import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, completeMission, asignarMultiplesMisiones, completarMultiplesMisiones } from "../controllers/gameController";
+import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, completeMission, asignarMultiplesMisiones, completarMultiplesMisiones, completarMultiplesMisiones2 } from "../controllers/gameController";
 
 // const Bowser = new Enemy('Bowser', 'LANZA LLAMAS', 100, 'CAPARAZON PROTECTOR');
 // const DonkeyKong = new Enemy('Donkey Kong', 'LANZA BANANAS', 100, 'ESCUDO');
@@ -46,7 +46,7 @@ asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
 
 
 //Ahora le debes asignar una mision al personaje elegido para jugar:
-const mision = asignarMision(MissionType.Main, "Mario")
+//const mision = asignarMision(MissionType.Main, "Mario")
 // asignarMision(MissionType.Event, "Mario")
 // asignarMision(MissionType.Side, "Luigi")
 
@@ -64,10 +64,10 @@ enemigo.recibirAtaqueSinDefensa()
 
 personaje.atacarContrincante()
 enemigo.recibirAtaqueSinDefensa()
-console.log(personaje);
-console.log(enemigo);
+// console.log(personaje);
+// console.log(enemigo);
 
-completarMultiplesMisiones('Mario', enemigo)
+completarMultiplesMisiones(personaje, enemigo)
 // if(mision !== undefined){
 //     completeMission(personaje, mision, enemigo)
 
