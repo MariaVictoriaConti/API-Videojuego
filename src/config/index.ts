@@ -5,17 +5,18 @@ import { Character, PODERES } from "../models/Character";
 import { Mage, PODERMAGICO  } from "../models/Mage";
 import { Warrior, DEFENSA, SUPERPODER } from "../models/Warrior";
 import { Enemy } from "../models/Enemy";
-import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, completeMission } from "../controllers/gameController";
+import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, completeMission, asignarMultiplesMisiones, completarMultiplesMisiones } from "../controllers/gameController";
 
-const Bowser = new Enemy('Bowser', 'LANZA LLAMAS', 100, 'CAPARAZON PROTECTOR');
-const DonkeyKong = new Enemy('Donkey Kong', 'LANZA BANANAS', 100, 'ESCUDO');
-const Mario = createCharacter('Mario');
-const Luigi = createCharacter('Luigi');
+// const Bowser = new Enemy('Bowser', 'LANZA LLAMAS', 100, 'CAPARAZON PROTECTOR');
+// const DonkeyKong = new Enemy('Donkey Kong', 'LANZA BANANAS', 100, 'ESCUDO');
+// const Mario = createCharacter('Mario');
+// const Luigi = createCharacter('Luigi');
 
-const misionMain = new Mission(MissionType.Main);
-const misionSide = new Mission(MissionType.Side);
-const misionEvent = new Mission(MissionType.Event);
+// const misionMain = new Mission(MissionType.Main);
+// const misionSide = new Mission(MissionType.Side);
+// const misionEvent = new Mission(MissionType.Event);
 
+// asignarMultiplesMisiones
 
 
 // ESQUEMA GENERAL DEL JUEGO
@@ -32,37 +33,41 @@ console.log("\nBienvenidos a SUPER MARIO BROUSS! \nPara comenzar deber crear el 
 
 
 
-// //Creamos 2 personajes distintos
-//const personaje = createCharacter("Mario")
-// //createCharacter("Luigi")
+//Creamos 2 personajes distintos
+const personaje = createCharacter("Mario")
+//createCharacter("Luigi")
 
-// //Ahora elegimos el superPoder que se sumara al inventario y utilizaras en la mision:
-// asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
+//Ahora elegimos el superPoder que se sumara al inventario y utilizaras en la mision:
+asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
 
-//Actualizo algun dato del personaje creado
-//upDateCharacterOK("Mario", "name", "Luigi")
-//console.log(personaje);
+// // Actualizo algun dato del personaje creado
+// upDateCharacterOK("Mario", "name", "Luigi")
+// console.log(personaje);
 
 
-// //Ahora le debes asignar una mision al personaje elegido para jugar:
-// const mision = asignarMision(MissionType.Main, "Mario")
-// // asignarMision(MissionType.Event, "Mario")
-// // asignarMision(MissionType.Side, "Luigi")
+//Ahora le debes asignar una mision al personaje elegido para jugar:
+const mision = asignarMision(MissionType.Main, "Mario")
+// asignarMision(MissionType.Event, "Mario")
+// asignarMision(MissionType.Side, "Luigi")
 
-// const enemigo = new Enemy("Bowser", "LanzaLLAMA", 100, "CAPARAZON")
+const enemigo = new Enemy("Bowser", "LanzaLLAMA", 100, "CAPARAZON")
+asignarMultiplesMisiones('Mario', MissionType.Main, MissionType.Side)
 
-// personaje.atacarContrincante();
-// enemigo.recibirAtaqueSinDefensa()
+personaje.atacarContrincante();
+enemigo.recibirAtaqueSinDefensa()
 
-// personaje.atacarContrincante();
-// enemigo.recibirAtaqueSinDefensa()
+personaje.atacarContrincante();
+enemigo.recibirAtaqueSinDefensa()
 
-// personaje.atacarContrincante()
-// enemigo.recibirAtaqueSinDefensa()
+personaje.atacarContrincante()
+enemigo.recibirAtaqueSinDefensa()
 
-// personaje.atacarContrincante()
-// enemigo.recibirAtaqueSinDefensa()
+personaje.atacarContrincante()
+enemigo.recibirAtaqueSinDefensa()
+console.log(personaje);
+console.log(enemigo);
 
+completarMultiplesMisiones('Mario', enemigo)
 // if(mision !== undefined){
 //     completeMission(personaje, mision, enemigo)
 
