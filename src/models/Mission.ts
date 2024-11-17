@@ -93,8 +93,12 @@ export class Mission {
 */
 
 
-//const mision1 = new Mission()
-//mision1.setTypeMission = MissionType.Main
+const mision1 = new Mission(MissionType.Main);
+mision1.setDetallesMision();
+console.log(mision1);
+
+
+
 //console.log(mision1.description);
 //console.log(mision1.difficulty);
 //console.log(mision1.reward);
