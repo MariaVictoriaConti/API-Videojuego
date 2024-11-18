@@ -204,16 +204,13 @@ export async function completarMultiplesMisiones(character: Character, enemigo: 
 
 //opcion 2
 export async function completarMultiplesMisiones2(character: string): Promise<void> {
-    // Find the character in the list
     const personajeBuscado = characters.find((personaje) => personaje.name === character);
 
-    // Check if the character exists
     if (!personajeBuscado) {
         console.log(`No se encontró el personaje con nombre "${character}".`);
         return;
     }
 
-    // Check if the character has missions to complete
     if (!personajeBuscado._listaMisiones || personajeBuscado._listaMisiones.length === 0) {
         console.log(`${personajeBuscado.name} no tiene misiones para completar.`);
         return;
@@ -224,12 +221,15 @@ export async function completarMultiplesMisiones2(character: string): Promise<vo
             switch (mision) {
                 case MissionType.Main:
                     const resultadoMain = await completeMission2(personajeBuscado.name, MissionType.Main);
+                    console.log(resultadoMain);                    
                     break;
                 case MissionType.Side:
                     const resultadoSide = await completeMission2(personajeBuscado.name, MissionType.Side);
+                    console.log(resultadoSide);
                     break;
                 case MissionType.Event:
                     const resultadoEvent = await completeMission2(personajeBuscado.name, MissionType.Event);
+                    console.log(resultadoEvent);
                     break;
                 default:
                     console.log(`Tipo de misión desconocido: ${mision}`);
