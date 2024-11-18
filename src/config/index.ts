@@ -9,22 +9,27 @@ import { characters, createCharacter, listCharacters, deleteCharacter, upDateCha
 
 // Función que simula el flujo principal del juego
 async function jugar(): Promise<void> {
-    console.log("\nBienvenidos a SUPER MARIO BROUSS! \nPara comenzar deber crear el personaje con el que vas a jugar..\n");
+    try{
+        console.log("\nBienvenidos a SUPER MARIO BROUSS! \nPara comenzar deber crear el personaje con el que vas a jugar..\n");
 
-    //Gestionamos el personaje principal(creacion, asignacion de misiones y poderes, etc..)
-    const personaje = createCharacter("Mario")
-    asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
-    asignarMultiplesMisiones('Mario', MissionType.Main, MissionType.Side)
-
-    //Creamos el archienemigo que corresponde a esa mision
-    const enemigo = new Enemy('Bowser', 'LanzaLLAMA', 100, 'CAPARAZON PROTECTOR');
-
-    // Simulamos el combate
-    //await combate(personaje, enemigo);  // El jugador pelea contra un enemigo
-
-    //Verificamos si completo todas las misiones //FALTA VER PORQUE NO SE EJECUTA BIEN ESTE COMPLETAR MULTIPLES MISIONES..
-    completarMultiplesMisiones2(personaje.name);
-
+        //Gestionamos el personaje principal(creacion, asignacion de misiones y poderes, etc..)
+        const personaje = createCharacter("Mario")
+        asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")
+        asignarMultiplesMisiones('Mario', MissionType.Main, MissionType.Side)
+    
+        //Creamos el archienemigo que corresponde a esa mision
+        const enemigo = new Enemy('Bowser', 'LanzaLLAMA', 100, 'CAPARAZON PROTECTOR');
+    
+        // Simulamos el combate
+        //await combate(personaje, enemigo);  // El jugador pelea contra un enemigo
+    
+        //Verificamos si completo todas las misiones //FALTA VER PORQUE NO SE EJECUTA BIEN ESTE COMPLETAR MULTIPLES MISIONES..
+        completarMultiplesMisiones2(personaje.name);
+    }catch(error){
+        console.log("Error al ejecutar el juego: " + error);
+    }finally{
+        console.log("Juego finalizado, gracias por jugar!");
+    }
 }
 
 // Iniciamos el juego
