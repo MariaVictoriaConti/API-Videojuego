@@ -43,7 +43,7 @@ export class Enemy {
     }
 
     public atacarContrincante(): void {
-        console.log(`${this.name} ataca..`);
+        console.log(`${this.name} ataca...`);
         this._health -= 20
         if (this.health <= 0) {
             console.log(this.name + " GAME OVER");
@@ -51,25 +51,21 @@ export class Enemy {
             console.log(this._name + " pierde 20 de salud por atacar. Su salud actual es: " + this._health);
         }
     }
+
     public recibirAtaqueSinDefensa(): void {
         if (this.health < 29) {
             this._health -= 30
             console.log(`${this._name} has sido derrotado!`);
             console.log(this._name + " GAME OVER");
-
-
-
         } else if (this.health >= 29) {
             this.health -= 30;
-            console.log(`${this.name} es atacado desprevenidamente.. y su salud disminuye a ${this.health}..`);
-
+            console.log(`${this.name} es atacado desprevenidamente.. y su salud disminuye a ${this.health}.`);
         }
     }
+
     public recibirAtaqueConDefensa(): void {
         if (this._health >= 0) {
             console.log(`${this.name} es atacado pero se defiende y no afecta su salud.`);
         }
     }
 }
-// export const Bowser = new Enemy("Bowser", "LANZAFUEGO", 100, "CAPARAZON PROTECTOR");
-// export const DonkeyKong = new Enemy("Donkey Kong", "FUERZASUPREMA", 100, "ESCUDO");

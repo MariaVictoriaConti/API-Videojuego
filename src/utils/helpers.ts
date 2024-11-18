@@ -2,16 +2,15 @@ import { Character } from "../models/Character";
 import { Enemy } from "../models/Enemy";
 import { triggerEvent } from "../controllers/gameController";
 
-
-
+// Funcion que simula un combate entre el personaje y el enemigo
 export async function combate(personaje: Character, enemigo: Enemy): Promise<void> {
     console.log(`${personaje.name} está luchando contra el enemigo...`);
 
     // Esperamos 2 segundos antes de resolver el combate
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    let arrayDeAtaques = [() => personaje.atacarContrincante(), () => enemigo.atacarContrincante(), () => personaje.recibirAtaqueConDefensa(), () => enemigo.recibirAtaqueConDefensa, () => triggerEvent(personaje), () => personaje.recibirAtaqueSinDefensa, () => enemigo.recibirAtaqueSinDefensa]
-
+    // Todos los ataques disponibles se ponen dentro de un array, para poder usarlos con el metodo random
+    let arrayDeAtaques = [() => personaje.atacarContrincante(), () => enemigo.atacarContrincante(), () => personaje.recibirAtaqueConDefensa(), () => enemigo.recibirAtaqueConDefensa, () => triggerEvent(personaje), () => personaje.recibirAtaqueSinDefensa, () => enemigo.recibirAtaqueSinDefensa];
 
     while (enemigo.health > 0 && personaje.health > 0) {
         let randomBatalla = Math.floor(Math.random() * arrayDeAtaques.length);

@@ -4,6 +4,7 @@ export enum MissionType {
     Side = "Side",
     Event = "Event",
 }
+
 // Creacion de clase Mission
 export class Mission {
     private _description!: string;
@@ -54,8 +55,6 @@ export class Mission {
         }
     }
 
-
-
     // Metodo para ver los detalles de las misiones disponibles
     public setDetallesMision() {
         if (this.typeMission == MissionType.Main) {
@@ -63,7 +62,7 @@ export class Mission {
             this._difficulty = 2
             this._reward = 10
         } else if (this.typeMission === MissionType.Side) {
-            this._description = "Derrotar a DEnemigo que intenta tomar el poder total del reino Champignon y destruir a todo el pueblo."
+            this._description = "Derrotar a Enemigo que intenta tomar el poder total del reino Champignon y destruir a todo el pueblo."
             this._difficulty = 3
             this._reward = 20
         } else if (this.typeMission === MissionType.Event) {
@@ -73,34 +72,3 @@ export class Mission {
         }
     }
 }
-
-
-/*
-    public set setTypeMission(value:MissionType){
-        if (value === MissionType.Main) {
-                this._description = "Derrotar a Bowser para rescatar a la Princesa Peach."
-                this._difficulty = 2
-                this._reward = 10
-            }else if (value === MissionType.Side) {
-            this._description = "Derrotar a Donkey Kong que intenta tomar el poder total del reino Champignon y destruir a todo el pueblo."
-            this._difficulty = 3
-            this._reward = 20
-        } else if (value === MissionType.Event) {
-            this._description = "Recolectar la mayor cantidad de estrellas posibles que te daran energia para completar tu salud al 100% y poder derrotar a los archienemigos en las otras misiones."
-            this._difficulty = 4
-            this._reward = 30
-        }
-        console.log(`${this.description}. Dificultad: ${this._difficulty}. Recompensa: ${this._reward}.\n`);
-    }
-*/
-
-
-// const mision1 = new Mission(MissionType.Main);
-// mision1.setDetallesMision();
-// console.log(mision1);
-
-
-
-//console.log(mision1.description);
-//console.log(mision1.difficulty);
-//console.log(mision1.reward);

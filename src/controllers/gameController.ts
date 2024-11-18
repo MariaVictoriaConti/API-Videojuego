@@ -1,10 +1,12 @@
+// Importación de módulos
 import { Character, PODERES } from "../models/Character";
 import { Mission, MissionType } from "../models/Mission";
 import { Enemy } from "../models/Enemy";
 import { combate, evento } from "../utils/helpers";
-// Gestion de personajes
-export let characters: Character[] = [];
 
+// GESTIÓN DE PERSONAJES
+
+export let characters: Character[] = [];
 
 // Funcion para crear un personaje nuevo
 export function createCharacter(name: string) {
@@ -59,7 +61,7 @@ export function asignarPoderApersonaje(poder: PODERES, personaje: string) {
     }
 }
 
-//Gestion de misiones
+//GESTIÓN DE MISIONES
 
 // Funcion para asignar una mision nueva a un personaje
 export function asignarMision(value: MissionType, nombrePersonaje: string) {
@@ -109,9 +111,7 @@ export async function completeMission2(personajeAbuscar: string, mision: Mission
             personajeBuscado.level += 1
             personajeBuscado._listaMisiones.splice(personajeBuscado._listaMisiones.indexOf(mision), 1);
             console.log(personajeBuscado._listaMisiones);
-
             return `Completaste la mision ${mision}. Sumaste ${personajeBuscado.experience} a tu experiencia. Pasaste al nivel ${personajeBuscado.level}.`;
-
         } else {
             return "No tienes esa mision";
         }
@@ -121,7 +121,6 @@ export async function completeMission2(personajeAbuscar: string, mision: Mission
 }
 
 export async function completarMultiplesMisiones2(character: string, callback?: () => Promise<void>): Promise<void> {
-
     const personajeBuscado = characters.find((personaje) => personaje.name === character);
 
     if (!personajeBuscado) {
@@ -137,7 +136,6 @@ export async function completarMultiplesMisiones2(character: string, callback?: 
     try {
         for (const mision of personajeBuscado._listaMisiones) {
             let resultado: String;
-
             switch (mision) {
                 case MissionType.Main:
                     let enemigoMain = new Enemy("Bowser", "LANZAFUEGO", 100, "CAPARAZON PROTECTOR");
@@ -164,8 +162,8 @@ export async function completarMultiplesMisiones2(character: string, callback?: 
                     console.log(`Tipo de misión desconocido: ${mision}`);
                     continue;
             }
-            if (callback) {
 
+            if (callback) {
                 await callback();
                 break;
             }
@@ -179,14 +177,10 @@ export async function completarMultiplesMisiones2(character: string, callback?: 
                 break;
             }
         }
-
-
-
     } catch (error) {
         console.log('Ocurrió un error al completar las misiones:', error);
     }
 }
-
 
 // Funcion para mostrar la lista de las misiones que tiene un personaje
 export function listarMisiones(personaje: string) {
@@ -197,7 +191,6 @@ export function listarMisiones(personaje: string) {
         console.log("No se encontro el personaje.");
     }
 }
-
 
 //Gestion de eventos sorpresa
 export async function triggerEvent(personaje: Character): Promise<void> {
@@ -211,58 +204,3 @@ export async function triggerEvent(personaje: Character): Promise<void> {
         console.log('Evento sorpresa finalizado.');
     }
 }
-
-
-
-//  const enemigo = new Enemy('Bowser', 'bla', 100, 'blabla')
-//  const personaje = createCharacter('Mario')
-
-//  asignarMultiplesMisiones("Mario", MissionType.Main, MissionType.Event);
-//  completarMultiplesMisiones2('Mario')
-
-
-//  completarMultiplesMisiones('Mario', enemigo)
-
-
-// const Mario = new Character('Mario')
-// console.log(Mario);
-// triggerEvent(Mario);
-
-
-// const personaje2 = createCharacter("luigi")
-
-// listCharacters()
-
-// asignarMision(MissionType.Main, "luigi")
-// console.log(personaje2._listaMisiones);
-
-
-/*
-let mision = new Mission().setTypeMission = value;
-//const personaje2 = createCharacter("luigi")
-console.log("---------------------------------------");
-
-listCharacters()// check
-console.log("---------------------------------------");
-
-asignarMision(MissionType.Main, "mario") //Check
-console.log(characters);
-console.log("---------------------------------------");
-
-listarMisiones("mario") //check
-console.log("---------------------------------------");
-
-completeMission("mario", MissionType.Main, "Bowser") //check
-
-//deleteCharacter("mario") //check
-//listCharacters()// check
-//console.log("---------------------------------------");
-
-
-//asignarPoderApersonaje(PODERES.SUPERSALTO, "luigi") //check
-//listCharacters()
-//asignarPoderApersonaje(PODERES.SUPERSALTO, "luigi") //check que si se repite no lo vuelve a agregar.
-
-//upDateCharacterOK("Mario", "experience", 100);
-//console.log(characters);
-*/

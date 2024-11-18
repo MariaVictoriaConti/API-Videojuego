@@ -68,7 +68,7 @@ export class Character{
         }
     }
 
-    public set inventory(value:string[]){ // REVISAR 
+    public set inventory(value:string[]){ 
         this._inventory = [];
     }
 
@@ -94,7 +94,7 @@ export class Character{
             console.log(this.name + ": GAME OVER");
         } else if (this.health >= 29) {
             this.health -= 30;        
-            console.log(`${this.name} es atacado desprevenidamente.. y su salud disminuye a ${this.health}..`);
+            console.log(`${this.name} es atacado desprevenidamente y su salud disminuye a ${this.health}.`);
         }
     }
 
