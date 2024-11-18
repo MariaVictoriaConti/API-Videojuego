@@ -1,8 +1,7 @@
 import { Character, PODERES } from "../models/Character";
 import { Mission, MissionType } from "../models/Mission";
 import { Enemy } from "../models/Enemy";
-import { sumar10Salud } from "../utils/helpers";
-
+import { combate, evento } from "../utils/helpers";
 // Gestion de personajes
 export let characters: Character[] = [];
 
@@ -45,66 +44,6 @@ export function upDateCharacterOK<T extends keyof Character>(personajeAbuscar: s
     }
 }
 
-//Gestion de misiones
-
-// Funcion para asignar una mision nueva a un personaje
-export function asignarMision(value: MissionType, nombrePersonaje: string) {
-    let personaje = characters.find(personaje => personaje.name === nombrePersonaje)
-    let mision = new Mission(value);
-
-    if (personaje) {
-        console.log("Mision creada y asignada a: " + personaje.name + ".");        
-        mision.setDetallesMision();
-        console.log(nombrePersonaje + ", tu mision es: " + mision.description)
-        personaje._listaMisiones.push(mision.typeMission);
-        return personaje._listaMisiones
-    } else if (!personaje) {
-        console.log("No existe personaje con ese nombre para asignarle la mision.")
-    } 
-}
-
-// Funcion para completar misiones
-export async function completeMission(personaje: Character, mision: Mission, enemy: Enemy) {
-    if (enemy.health <= 0) {
-        personaje.level += 1;
-        personaje.health += mision.reward
-        personaje.experience += mision.reward
-        return `Completaste la mision ${mision.typeMission}. Sumaste ${personaje.experience} a tu experiencia. Pasaste al nivel ${personaje.level}.`;
-        } else {
-        return "Aun no completaste la mision " + mision.typeMission;    
-        }
-    }
-
-
-export async function completeMission2(personajeAbuscar:string, mision:MissionType){
-let personajeBuscado = characters.find(personaje => personaje.name === personajeAbuscar)
-let exito = Math.random() * 0.8
-    if (personajeBuscado && exito > 0.5) {
-        if (personajeBuscado._listaMisiones.includes(mision)) {
-            personajeBuscado.health += 10
-            personajeBuscado.experience += 10
-            personajeBuscado.level += 1
-            personajeBuscado._listaMisiones.splice(personajeBuscado._listaMisiones.indexOf(mision), 1);
-            return `Completaste la mision ${mision}. Sumaste ${personajeBuscado.experience} a tu experiencia. Pasaste al nivel ${personajeBuscado.level}.`;
-        } else {
-        return "No tienes esa mision";    
-        }
-    }else{
-        return `Resultado: No has completado la mision ${mision}`;
-    }
-}
-
-
-// Funcion para mostrar la lista de las misiones que tiene un personaje
-export function listarMisiones(personaje: string) {
-    let personajeBuscado = characters.find(character => character.name === personaje)
-    if (personajeBuscado) {
-        console.log("La lista de misiones de " + personajeBuscado.name + " es: " + personajeBuscado._listaMisiones + ".\n");
-    } else {
-        console.log("No se encontro el personaje.");
-    }
-}
-
 // Funcion para la gestion de inventario
 export function asignarPoderApersonaje(poder: PODERES, personaje: string) {
     let personajeBuscado = characters.find(value => value.name === personaje);
@@ -120,25 +59,21 @@ export function asignarPoderApersonaje(poder: PODERES, personaje: string) {
     }
 }
 
-// Eventos sopresa
-export async function evento(): Promise<string> {
-    return new Promise((resolve) => {
-        const evento = 'Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.'
-        setInterval(() => resolve(evento), 2000)
-    })
-}
+//Gestion de misiones
 
-export async function triggerEvent(personaje: Character): Promise<void> {
-    try {
-        console.log('Evento sorpresa!');
-        const resultado = await evento();
-        let sumarPuntos = await sumar10Salud(personaje)
-        console.log(resultado);
-        console.log(personaje);
-    } catch (error) {
-        console.log('Ocurrio un error: ', error);
-    } finally {
-        console.log('Evento sorpresa finalizado.');
+// Funcion para asignar una mision nueva a un personaje
+export function asignarMision(value: MissionType, nombrePersonaje: string) {
+    let personaje = characters.find(personaje => personaje.name === nombrePersonaje)
+    let mision = new Mission(value);
+
+    if (personaje) {
+        console.log("Mision creada y asignada a: " + personaje.name + ".");
+        mision.setDetallesMision();
+        console.log(nombrePersonaje + ", tu mision es: " + mision.description)
+        personaje._listaMisiones.push(mision.typeMission);
+        return personaje._listaMisiones
+    } else if (!personaje) {
+        console.log("No existe personaje con ese nombre para asignarle la mision.")
     }
 }
 
@@ -159,51 +94,34 @@ export async function asignarMultiplesMisiones(character: string, mision1: Missi
             }
         }
     })
-    .then((mensaje) => console.log(mensaje))
-    .catch((error) => console.log(error))
+        .then((mensaje) => console.log(mensaje))
+        .catch((error) => console.log(error))
 }
 
+// Funcion para completar misiones
+export async function completeMission2(personajeAbuscar: string, mision: MissionType, enemigo: Enemy) {
+    let personajeBuscado = characters.find(personaje => personaje.name === personajeAbuscar)
+    let exito = enemigo.health <= 0
+    if (personajeBuscado && exito) {
+        if (personajeBuscado._listaMisiones.includes(mision)) {
+            personajeBuscado.health += 10
+            personajeBuscado.experience += 10
+            personajeBuscado.level += 1
+            personajeBuscado._listaMisiones.splice(personajeBuscado._listaMisiones.indexOf(mision), 1);
+            console.log(personajeBuscado._listaMisiones);
 
-export async function completarMultiplesMisiones(character: Character, enemigo: Enemy): Promise<void> {
-    const personajeBuscado = characters.find((personaje) => personaje.name === character.name);
+            return `Completaste la mision ${mision}. Sumaste ${personajeBuscado.experience} a tu experiencia. Pasaste al nivel ${personajeBuscado.level}.`;
 
-    if (!personajeBuscado) {
-        console.log(`No se encontró el personaje con nombre "${character}".`);
-        return;
-    }
-
-    if (!personajeBuscado._listaMisiones || personajeBuscado._listaMisiones.length === 0) {
-        console.log(`${personajeBuscado.name} no tiene misiones para completar.`);
-        return;
-    }
-
-    try {
-        for (const mision of personajeBuscado._listaMisiones) {
-            if (mision === 'Main') {          
-                let mision = new Mission(MissionType.Main)
-                mision.setDetallesMision();
-                const resultado = await completeMission(personajeBuscado, mision, enemigo)
-                console.log(resultado);
-            } else if (mision === 'Side') {
-                let mision = new Mission(MissionType.Side)
-                mision.setDetallesMision();
-                const resultado = await completeMission(personajeBuscado, mision, enemigo)
-                console.log(resultado);
-            } else if (mision === 'Event') {
-                let mision = new Mission(MissionType.Event)
-                mision.setDetallesMision();
-                const resultado = await completeMission(personajeBuscado, mision, enemigo)
-                console.log(resultado);
-            } 
-            
+        } else {
+            return "No tienes esa mision";
         }
-    } catch (error) {
-        console.log('Ocurrio un error al completar las misiones.', error);
+    } else {
+        return `Resultado: No has completado la mision ${mision}`;
     }
 }
 
-//opcion 2
-export async function completarMultiplesMisiones2(character: string): Promise<void> {
+export async function completarMultiplesMisiones2(character: string, callback?: () => Promise<void>): Promise<void> {
+
     const personajeBuscado = characters.find((personaje) => personaje.name === character);
 
     if (!personajeBuscado) {
@@ -218,35 +136,89 @@ export async function completarMultiplesMisiones2(character: string): Promise<vo
 
     try {
         for (const mision of personajeBuscado._listaMisiones) {
+            let resultado: String;
+
             switch (mision) {
                 case MissionType.Main:
-                    const resultadoMain = await completeMission2(personajeBuscado.name, MissionType.Main);
-                    console.log(resultadoMain);                    
+                    let enemigoMain = new Enemy("Bowser", "LANZAFUEGO", 100, "CAPARAZON PROTECTOR");
+                    console.log("Iniciando mision Main");
+                    await combate(personajeBuscado, enemigoMain);
+                    resultado = await completeMission2(personajeBuscado.name, MissionType.Main, enemigoMain);
+                    console.log(`${resultado}`);
                     break;
                 case MissionType.Side:
-                    const resultadoSide = await completeMission2(personajeBuscado.name, MissionType.Side);
-                    console.log(resultadoSide);
+                    let enemigoSide = new Enemy("Donkey Kong", "FUERZASUPREMA", 100, "ESCUDO");
+                    console.log("Iniciando mision Side");
+                    await combate(personajeBuscado, enemigoSide);
+                    resultado = await completeMission2(personajeBuscado.name, MissionType.Side, enemigoSide);
+                    console.log(`${resultado}`);
                     break;
                 case MissionType.Event:
-                    const resultadoEvent = await completeMission2(personajeBuscado.name, MissionType.Event);
-                    console.log(resultadoEvent);
+                    let enemigoEvent = new Enemy("Donkey Kong", "FUERZASUPREMA", 100, "ESCUDO");
+                    console.log("Iniciando mision Event");
+                    await combate(personajeBuscado, enemigoEvent);
+                    resultado = await completeMission2(personajeBuscado.name, MissionType.Event, enemigoEvent);
+                    console.log(`${resultado}`);
                     break;
                 default:
                     console.log(`Tipo de misión desconocido: ${mision}`);
-                    break;
+                    continue;
+            }
+            if (callback) {
+
+                await callback();
+                break;
+            }
+
+            if (personajeBuscado._listaMisiones.length === 0) {
+                console.log("No tienes mas misiones para completar");
+                break;
+            } else if (personajeBuscado._listaMisiones.length > 0) {
+                //await combate(personajeBuscado, enemigo);
+                await completarMultiplesMisiones2(personajeBuscado.name);
+                break;
             }
         }
+
+
+
     } catch (error) {
         console.log('Ocurrió un error al completar las misiones:', error);
     }
 }
 
 
-//  const enemigo = new Enemy('Bowser', 'bla', 100, 'blabla')
-// const personaje = createCharacter('Mario')
+// Funcion para mostrar la lista de las misiones que tiene un personaje
+export function listarMisiones(personaje: string) {
+    let personajeBuscado = characters.find(character => character.name === personaje)
+    if (personajeBuscado) {
+        console.log("La lista de misiones de " + personajeBuscado.name + " es: " + personajeBuscado._listaMisiones + ".\n");
+    } else {
+        console.log("No se encontro el personaje.");
+    }
+}
 
-// asignarMultiplesMisiones("Mario", MissionType.Main, MissionType.Event);
-// completarMultiplesMisiones2('Mario')
+
+//Gestion de eventos sorpresa
+export async function triggerEvent(personaje: Character): Promise<void> {
+    try {
+        console.log('Evento sorpresa!');
+        const resultado = await evento(personaje);
+        console.log(resultado);
+    } catch (error) {
+        console.log('Ocurrio un error: ', error);
+    } finally {
+        console.log('Evento sorpresa finalizado.');
+    }
+}
+
+
+
+//  const enemigo = new Enemy('Bowser', 'bla', 100, 'blabla')
+//  const personaje = createCharacter('Mario')
+
+//  asignarMultiplesMisiones("Mario", MissionType.Main, MissionType.Event);
+//  completarMultiplesMisiones2('Mario')
 
 
 //  completarMultiplesMisiones('Mario', enemigo)

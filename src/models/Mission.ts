@@ -11,12 +11,12 @@ export class Mission {
     private _reward!: number;
     private _typeMission!: MissionType;
 
-// Para inicializarla solo usamos el tipo de mision
-    constructor(tipo:MissionType) {
+    // Para inicializarla solo usamos el tipo de mision
+    constructor(tipo: MissionType) {
         this._typeMission = tipo;
     }
 
-// Metodos getter
+    // Metodos getter
     public get description(): string {
         return this._description;
     }
@@ -33,35 +33,37 @@ export class Mission {
         return this._typeMission;
     }
 
-// Metodos setter
-    public set typeMission(value:MissionType){
+    // Metodos setter
+    public set typeMission(value: MissionType) {
         this._typeMission = value;
     }
 
-    public set description(value:string){
-        this._description= value;
+    public set description(value: string) {
+        this._description = value;
     }
 
-    public set difficulty(value:number){
+    public set difficulty(value: number) {
         if (value > 0) {
             this._difficulty = value;
         }
     }
 
-    public set reward(value:number){
+    public set reward(value: number) {
         if (value > 0) {
             this._reward = value;
         }
     }
 
+
+
     // Metodo para ver los detalles de las misiones disponibles
-    public setDetallesMision(){
+    public setDetallesMision() {
         if (this.typeMission == MissionType.Main) {
-            this._description = "Derrotar a Bowser para rescatar a la Princesa Peach."
+            this._description = "Derrotar a Enemigo para rescatar a la Princesa Peach."
             this._difficulty = 2
             this._reward = 10
         } else if (this.typeMission === MissionType.Side) {
-            this._description = "Derrotar a Donkey Kong que intenta tomar el poder total del reino Champignon y destruir a todo el pueblo."
+            this._description = "Derrotar a DEnemigo que intenta tomar el poder total del reino Champignon y destruir a todo el pueblo."
             this._difficulty = 3
             this._reward = 20
         } else if (this.typeMission === MissionType.Event) {
