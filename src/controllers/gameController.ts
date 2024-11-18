@@ -12,7 +12,7 @@ export let characters: Character[] = [];
 export function createCharacter(name: string) {
     const character = new Character(name);
     characters.push(character);
-    console.log(`Se ha creado el personaje ${name}.\n`);
+    console.log(`👲 Se ha creado el personaje ${name}.\n`);
     return character;
 }
 
@@ -29,9 +29,9 @@ export function deleteCharacter(personaje: string) {
     const indexCharacter = characters.findIndex(character => character.name === personaje)
     if (indexCharacter !== -1) {
         characters.splice(indexCharacter, 1);
-        console.log(`Se ha eliminado ${personaje} de la lista de personajes creados.\n`);
+        console.log(`❌ Se ha eliminado ${personaje} de la lista de personajes creados.\n`);
     } else {
-        console.log("No existe personaje con ese nombre");
+        console.log("❌ No existe personaje con ese nombre");
     }
 }
 
@@ -42,7 +42,7 @@ export function upDateCharacterOK<T extends keyof Character>(personajeAbuscar: s
         personajeBuscadoOK[atributo] = nuevoValor;
         console.log(`Se ha actualizado el atributo ${atributo} por el valor: ${nuevoValor}.`);
     } else {
-        console.log("No encontramos el personaje para actualizar sus datos.");
+        console.log("❌ No encontramos el personaje para actualizar sus datos.");
     }
 }
 
@@ -57,7 +57,7 @@ export function asignarPoderApersonaje(poder: PODERES, personaje: string) {
             console.log(`${personajeBuscado.name} ya tenes ese poder en tu inventario.\n`);
         }
     } else {
-        console.log("No hay personajes con ese nombre.\n");
+        console.log("❌ No hay personajes con ese nombre.\n");
     }
 }
 
@@ -69,13 +69,13 @@ export function asignarMision(value: MissionType, nombrePersonaje: string) {
     let mision = new Mission(value);
 
     if (personaje) {
-        console.log("Mision creada y asignada a: " + personaje.name + ".");
+        console.log("\nMision creada y asignada a: " + personaje.name + ".");
         mision.setDetallesMision();
         console.log(nombrePersonaje + ", tu mision es: " + mision.description)
         personaje._listaMisiones.push(mision.typeMission);
         return personaje._listaMisiones
     } else if (!personaje) {
-        console.log("No existe personaje con ese nombre para asignarle la mision.")
+        console.log("\n❌ No existe personaje con ese nombre para asignarle la mision.")
     }
 }
 
@@ -111,7 +111,7 @@ export async function completeMission2(personajeAbuscar: string, mision: Mission
             personajeBuscado.level += 1
             personajeBuscado._listaMisiones.splice(personajeBuscado._listaMisiones.indexOf(mision), 1);
             console.log(personajeBuscado._listaMisiones);
-            return `Completaste la mision ${mision}. Sumaste ${personajeBuscado.experience} a tu experiencia. Pasaste al nivel ${personajeBuscado.level}.`;
+            return `\n 🌟 Completaste la mision ${mision}. Sumaste ${personajeBuscado.experience} a tu experiencia. Pasaste al nivel ${personajeBuscado.level}.`;
         } else {
             return "No tienes esa mision";
         }
@@ -124,7 +124,7 @@ export async function completarMultiplesMisiones2(character: string, callback?: 
     const personajeBuscado = characters.find((personaje) => personaje.name === character);
 
     if (!personajeBuscado) {
-        console.log(`No se encontró el personaje con nombre "${character}".`);
+        console.log(`❌ No se encontró el personaje con nombre "${character}".`);
         return;
     }
 
@@ -139,21 +139,21 @@ export async function completarMultiplesMisiones2(character: string, callback?: 
             switch (mision) {
                 case MissionType.Main:
                     let enemigoMain = new Enemy("Bowser", "LANZAFUEGO", 100, "CAPARAZON PROTECTOR");
-                    console.log("Iniciando mision Main");
+                    console.log("\nIniciando mision Main");
                     await combate(personajeBuscado, enemigoMain);
                     resultado = await completeMission2(personajeBuscado.name, MissionType.Main, enemigoMain);
                     console.log(`${resultado}`);
                     break;
                 case MissionType.Side:
                     let enemigoSide = new Enemy("Donkey Kong", "FUERZASUPREMA", 100, "ESCUDO");
-                    console.log("Iniciando mision Side");
+                    console.log("\nIniciando mision Side");
                     await combate(personajeBuscado, enemigoSide);
                     resultado = await completeMission2(personajeBuscado.name, MissionType.Side, enemigoSide);
                     console.log(`${resultado}`);
                     break;
                 case MissionType.Event:
                     let enemigoEvent = new Enemy("Donkey Kong", "FUERZASUPREMA", 100, "ESCUDO");
-                    console.log("Iniciando mision Event");
+                    console.log("\nIniciando mision Event");
                     await combate(personajeBuscado, enemigoEvent);
                     resultado = await completeMission2(personajeBuscado.name, MissionType.Event, enemigoEvent);
                     console.log(`${resultado}`);
@@ -178,7 +178,7 @@ export async function completarMultiplesMisiones2(character: string, callback?: 
             }
         }
     } catch (error) {
-        console.log('Ocurrió un error al completar las misiones:', error);
+        console.log('❌ Ocurrió un error al completar las misiones:', error);
     }
 }
 
@@ -195,12 +195,12 @@ export function listarMisiones(personaje: string) {
 //Gestion de eventos sorpresa
 export async function triggerEvent(personaje: Character): Promise<void> {
     try {
-        console.log('Evento sorpresa!');
+        console.log('\n¡Evento sorpresa!');
         const resultado = await evento(personaje);
         console.log(resultado);
     } catch (error) {
-        console.log('Ocurrio un error: ', error);
+        console.log('❌ Ocurrio un error: ', error);
     } finally {
-        console.log('Evento sorpresa finalizado.');
+        console.log('Evento sorpresa finalizado.\n');
     }
 }

@@ -4,7 +4,7 @@ import { triggerEvent } from "../controllers/gameController";
 
 // Funcion que simula un combate entre el personaje y el enemigo
 export async function combate(personaje: Character, enemigo: Enemy): Promise<void> {
-    console.log(`${personaje.name} está luchando contra el enemigo...`);
+    console.log(`\n ⚔️  ${personaje.name} está luchando contra el enemigo...\n`);
 
     // Esperamos 2 segundos antes de resolver el combate
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -19,10 +19,10 @@ export async function combate(personaje: Character, enemigo: Enemy): Promise<voi
     };
 
     if (personaje.health <= 0) {
-        console.log(`${personaje.name} ha perdido la mision..`);
+        console.log(`\n🔴 ${personaje.name} ha perdido la mision..`);
         personaje.health = 100;
     } else {
-        console.log(`${personaje.name} ha superado la mision..`);
+        console.log(`\n🎇 ¡${personaje.name} ha superado la mision! 🎇`);
     }
 }
 
@@ -33,15 +33,13 @@ export function sumar10Salud(personaje: Character): void {
 
 export async function evento(personaje: Character): Promise<string> {
     return new Promise((resolve) => {
-        const evento = Math.random() > 0.5 ? 'Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.' : 'Recibiste un ataque extra-fuerte, tu salud se ha reducido en 20.'
-        if (evento === 'Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.') {
+        const evento = Math.random() > 0.5 ? '🍄 Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.' : '💥 Recibiste un ataque extra-fuerte, tu salud se ha reducido en 20.';
+        if (evento === '🍄 Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.') {
             sumar10Salud(personaje)
             console.log(`Su salud es de: ${personaje.health}`);
-            
         } else {
             personaje.health -= 20
             console.log(`Su salud es de: ${personaje.health}`);
-            
         }
         setInterval(() => resolve(evento), 1000)
     })
