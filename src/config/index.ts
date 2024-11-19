@@ -1,7 +1,7 @@
 // Importación de módulos
 import { Mission, MissionType } from "../models/Mission";
 import { Character, PODERES } from "../models/Character";
-import { Mage, PODERMAGICO } from "../models/Mage";
+import { Mage } from "../models/Mage";
 import { Warrior, DEFENSA, SUPERPODER } from "../models/Warrior";
 import { characters, createCharacter, listCharacters, deleteCharacter, upDateCharacterOK, asignarMision, listarMisiones, asignarPoderApersonaje, asignarMultiplesMisiones, completarMultiplesMisiones2, triggerEvent } from "../controllers/gameController";
 

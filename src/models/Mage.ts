@@ -1,18 +1,14 @@
 import { Character } from './Character'
 
-export enum PODERMAGICO {
-    uno = "congelamiento", 
-    dos = "quitaVision", 
-    tres = "fatalati",
-}
+
 
 export class Mage extends Character {
-    private _poderMagico: PODERMAGICO;
+    private _poderMagico: number;
     private _mana: number; 
 
-    constructor(name: string, poderMagico: PODERMAGICO) {
+    constructor(name: string) {
         super(name);
-        this._poderMagico = poderMagico;
+        this._poderMagico = 50;
         this._mana = 100;
     }
 
@@ -24,7 +20,7 @@ export class Mage extends Character {
         return this._mana
     }
 
-    public set poderMagico(value:PODERMAGICO){
+    public set poderMagico(value:number){
     this._poderMagico = value
     }
 
@@ -34,11 +30,11 @@ export class Mage extends Character {
 
     public atacarContrincante(): void {
         if(this._mana >= 30 && this._mana <= 49){
-            console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.uno} que disminuye la salud del rival.`);    
+            console.log(`${this.name} lanza un ataque Magico que disminuye la salud del rival.`);    
         }else if(this._mana >49 && this._mana <= 69){
-            console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.dos} que disminuye la salud del rival.`);            
+            console.log(`${this.name} lanza un ataque Magico que disminuye la salud del rival.`);            
         }else if(this._mana > 69){
-            console.log(`${this.name} lanza su ataque Magico ${PODERMAGICO.tres} que derrota al rival eliminando toda su salud en un solo hechizo.`);            
+            console.log(`${this.name} lanza un ataque Magico que derrota al rival eliminando toda su salud en un solo hechizo.`);            
         }
     }
 

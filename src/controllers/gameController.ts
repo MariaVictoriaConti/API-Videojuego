@@ -2,7 +2,7 @@
 import { Character, PODERES } from "../models/Character";
 import { Mission, MissionType } from "../models/Mission";
 import { Enemy } from "../models/Enemy";
-import { combate, evento } from "../utils/helpers";
+import { combate, evento2 } from "../utils/helpers";
 
 // GESTIÓN DE PERSONAJES
 
@@ -110,7 +110,7 @@ export async function completeMission2(personajeAbuscar: string, mision: Mission
             personajeBuscado.experience += 10
             personajeBuscado.level += 1
             personajeBuscado._listaMisiones.splice(personajeBuscado._listaMisiones.indexOf(mision), 1);
-            console.log(personajeBuscado._listaMisiones);
+            //console.log(personajeBuscado._listaMisiones);
             return `\n 🌟 Completaste la mision ${mision}. Sumaste ${personajeBuscado.experience} a tu experiencia. Pasaste al nivel ${personajeBuscado.level}.`;
         } else {
             return "No tienes esa mision";
@@ -196,7 +196,7 @@ export function listarMisiones(personaje: string) {
 export async function triggerEvent(personaje: Character): Promise<void> {
     try {
         console.log('\n¡Evento sorpresa!');
-        const resultado = await evento(personaje);
+        const resultado = await evento2(personaje);
         console.log(resultado);
     } catch (error) {
         console.log('❌ Ocurrio un error: ', error);
