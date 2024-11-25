@@ -35,3 +35,16 @@ Son las tareas a completar que se le asignan al personaje. Se divide en 3: Main,
 * Dificultad: dependiendo de la misión, la dificultad para pasarla puede ser mayor o menor. 
 * Recompensa: si se cumple la misión con éxito, se dará una recompensa. 
 * Tipo de misión: las misiones se dividen entre Main, Side o Event. Cada una cuenta con características diferentes. 
+
+### Enemy
+Es el contrincante a quien se enfrenta el Personaje principal. Cambia según las misiones y puede enviar ataques hacia el personaje y afectar su salud, así como también puede recibir ataques y defenderse. Es derrotado cuando su salud llega a 0 se da por finalizada la misión.
+
+### Mago y Warrior
+Son personajes que aparecen de forma sorpresiva durante las misiones y ayudan al personaje. En el caso de Mage, ayuda a aumentar la salud con un hechizo. En caso de Warrior, le enseña al personaje una nueva forma de ataque y le obsequia un nuevo poder para su inventario. 
+
+## Ejemplos de uso
+Para comenzar el juego es necesario la creación de al menos un personaje. Para esto usamos la función createCharacter, pasando como parámetro el nombre que tendrá el personaje. 
+
+Ejemplo de comando para la creación de un personaje: `createCharacter('Mario')`. Aquí estamos creando un personaje cuyo nokmbre será 'Mario'. Por defecto, su salud será seteada en 100, lo mismo que nivel y experiencia vienen seteados en 1. 
+
+A este mismo personaje podemos asignarle un poder para que pueda comenzar sus misiones. Esto se pude realizar con la función asignarPoderAPersonaje de la siguiente forma: `asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")`. En este caso la función necesita de dos parámetros: el primero es el tipo de poder que se le va a asignar, y debe ser llamando al enum `PODERES` seguido de un punto. Ahpi aparecerán las opciones de poderes disponibles. El segundo parámetro a ingresar es el nombre del personaje al cual se le asignará el poder, que debe estar en formato string (entre comillas). 
