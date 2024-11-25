@@ -45,6 +45,26 @@ Son personajes que aparecen de forma sorpresiva durante las misiones y ayudan al
 ## Ejemplos de uso
 Para comenzar el juego es necesario la creación de al menos un personaje. Para esto usamos la función createCharacter, pasando como parámetro el nombre que tendrá el personaje. 
 
-Ejemplo de comando para la creación de un personaje: `createCharacter('Mario')`. Aquí estamos creando un personaje cuyo nokmbre será 'Mario'. Por defecto, su salud será seteada en 100, lo mismo que nivel y experiencia vienen seteados en 1. 
+### Creación de personaje
+Ejemplo de comando para la creación de un personaje: `createCharacter('Mario')`. Aquí estamos creando un personaje cuyo nombre será 'Mario'. Por defecto, su salud será seteada en 100, lo mismo que nivel y experiencia estarán seteados en 1. Se pueden crear la cantidad de personajes que se desee. 
 
-A este mismo personaje podemos asignarle un poder para que pueda comenzar sus misiones. Esto se pude realizar con la función asignarPoderAPersonaje de la siguiente forma: `asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")`. En este caso la función necesita de dos parámetros: el primero es el tipo de poder que se le va a asignar, y debe ser llamando al enum `PODERES` seguido de un punto. Ahpi aparecerán las opciones de poderes disponibles. El segundo parámetro a ingresar es el nombre del personaje al cual se le asignará el poder, que debe estar en formato string (entre comillas). 
+### Asignar poderes a un personaje
+Al personaje podemos asignarle un poder para que comience sus misiones. Esto se pude realizar con la función asignarPoderAPersonaje de la siguiente forma: `asignarPoderApersonaje(PODERES.PIZZABOOMERANG, "Mario")`. En este caso la función necesita de dos parámetros: el primero es el tipo de poder que se le va a asignar, y debe ser llamando al enum `PODERES` seguido de un punto. Ahí es donde aparecerán las opciones de poderes disponibles. El segundo parámetro a ingresar es el nombre del personaje al cual se le asignará el poder, que debe estar en formato string (entre comillas). 
+
+### Ver lista de personajes
+Si se desea ver la lista de los personajes ingresados, se puede hacer llamando a la función `listCharacter()`. Esto mostrará en consola la lista completa de personajes creados con su nombre, nivel, salud, experiencia, inventario y lista de misiones. 
+
+### Editar un personaje
+Se pueden editar los atributos de los personajes a través de la función upDateCharacterOK, ingresando como parámetro el nombre del personaje a editar, seguido del atributo que se quiera cambiar y por último el nuevo atributo. Ejemplo de uso: `upDateCharacterOK('Mario', 'name', 'Luigi')`, de esta forma, el personaje llamado "Mario" ahora pasa a llamarse "Luigi".
+
+### Eliminar personaje
+Se puede eliminar un personaje de la lista de personajes creados llamando a la función deleteCharacter y pasandole por parámetro el nombre del personaje que deseamos eliminar. Por ejemplo: `deleteCharacter('Mario')`.
+
+### Asignar una sola misión
+Al momento de asignarle misiones a un personaje podemos hacerlo de dos formas diferentes. La primera es con la función asignarMision de la siguiente forma: `asignarMision(TypeMission.Main, 'Mario')`, que asignará sólo la misión que pasemos como parámetro. Se debeerá utilizar el enum `TypeMission`, que tendrá como opciones el tipo de misión que se pueden elegir (Main, Side, Event). Como segundo parámetro pasamos como string el nombre del personaje al que le asignaremos la misión (en este caso, `'Mario'`).
+
+### Asignar varias misiones
+La segnda forma de asignar una misión es con la función asignarMultiplesMisiones de la siguiente forma: `asignarMultiplesMisiones('Mario', MissionType.Main, MissionType.Side)`. Con esta función podemos asignar varias misiones a un mismo personaje. Toma como parámetro el nombre en string del personaje al que se le asignarán las misiones, seguido por dos misiones como mínimo, que se llaman a través del enum MissionType. 
+
+### Ver lista de misiones
+Para saber cuales son las misiones que un personaje tiene asignadas y aun sin completar se puede utilizar la función listarMisiones, pasando como parámetro el nombre del personaje que se desea consultar. Por ejemplo: `listarMisiones('Mario')`, que devolverá una lista de las misiones que el personaje 'Mario' debe completar.
