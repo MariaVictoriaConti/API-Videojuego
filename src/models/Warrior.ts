@@ -1,13 +1,17 @@
+// Importamos Character
 import { Character } from './Character'
 
+// Enum de superpoderes
 export enum SUPERPODER{
     LANZAFUEGO = "LANZAFUEGO",
 }
 
+// Enum de defensa
 export enum DEFENSA{
     CAPARAZONPROTECTOR = "CAPARAZON PROTECTOR",
 }
 
+// Creacion clase Warrior
 export class Warrior extends Character {
     private _superPoder: SUPERPODER;
     private _defensa: DEFENSA; 
@@ -18,6 +22,7 @@ export class Warrior extends Character {
         this._defensa = defensa;
     }
 
+// Metodos getter y setter
     public get superPoder(){
         return this._superPoder;
     }
@@ -34,6 +39,7 @@ export class Warrior extends Character {
         this._defensa = value;
     } 
 
+    // Metodos que heredad de la clase Character
     public atacarContrincante(): void {
         super.atacarContrincante()
     }

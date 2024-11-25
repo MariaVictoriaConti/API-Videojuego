@@ -6,6 +6,7 @@ import { combate, evento2 } from "../utils/helpers";
 
 // GESTIÓN DE PERSONAJES
 
+// Array de personajes que usaremos para listar los personajes creados
 export let characters: Character[] = [];
 
 // Funcion para crear un personaje nuevo
@@ -79,7 +80,7 @@ export function asignarMision(value: MissionType, nombrePersonaje: string) {
     }
 }
 
-// Aceptar varias misiones
+// Funcion para aceptar varias misiones
 export async function asignarMultiplesMisiones(character: string, mision1: MissionType, mision2: MissionType, mision3?: MissionType): Promise<void> {
     let personajeBuscado = characters.find(personaje => personaje.name === character)
     const promesa = new Promise((resolve, reject) => {
@@ -110,7 +111,6 @@ export async function completeMission2(personajeAbuscar: string, mision: Mission
             personajeBuscado.experience += 10
             personajeBuscado.level += 1
             personajeBuscado._listaMisiones.splice(personajeBuscado._listaMisiones.indexOf(mision), 1);
-            //console.log(personajeBuscado._listaMisiones);
             return `\n 🌟 Completaste la mision ${mision}. Sumaste ${personajeBuscado.experience} a tu experiencia. Pasaste al nivel ${personajeBuscado.level}.`;
         } else {
             return "No tienes esa mision";
@@ -120,6 +120,7 @@ export async function completeMission2(personajeAbuscar: string, mision: Mission
     }
 }
 
+// Función para completar multiples misiones
 export async function completarMultiplesMisiones2(character: string, callback?: () => Promise<void>): Promise<void> {
     const personajeBuscado = characters.find((personaje) => personaje.name === character);
 
@@ -172,7 +173,6 @@ export async function completarMultiplesMisiones2(character: string, callback?: 
                 console.log("No tienes mas misiones para completar");
                 break;
             } else if (personajeBuscado._listaMisiones.length > 0) {
-                //await combate(personajeBuscado, enemigo);
                 await completarMultiplesMisiones2(personajeBuscado.name);
                 break;
             }
@@ -192,7 +192,7 @@ export function listarMisiones(personaje: string) {
     }
 }
 
-//Gestion de eventos sorpresa
+//GESTION DE EVENTOS SORPRESA
 export async function triggerEvent(personaje: Character): Promise<void> {
     try {
         console.log('\n¡Evento sorpresa!');

@@ -1,17 +1,20 @@
+// Importamos Character
 import { Character } from './Character'
 
 
-
+// Creacion de la clase MAge
 export class Mage extends Character {
     private _poderMagico: number;
     private _mana: number; 
 
+    // Para el constructor lo único que se pide es el nombre. Poder magico y mana se ponen ya de forma predeterminada.
     constructor(name: string) {
         super(name);
         this._poderMagico = 50;
         this._mana = 100;
     }
 
+    // MEtodos getter y setter
     public get poderMagico() {
         return this._poderMagico
     }
@@ -28,6 +31,7 @@ export class Mage extends Character {
         this._mana = value;
     }
 
+    // Metodo atacarContrincante: con cada ataque que realiza, pierde puntos de health.
     public atacarContrincante(): void {
         if(this._mana >= 30 && this._mana <= 49){
             console.log(`${this.name} lanza un ataque Magico que disminuye la salud del rival.`);    
@@ -38,6 +42,7 @@ export class Mage extends Character {
         }
     }
 
+    // Metodo recibirAtaqueSinDefensa, cuando Character es atacado desprevenido. Resta más puntos de health.
     public recibirAtaqueSinDefensa():void{
         console.log(`${this.name} es atacado desprevenidamente... y su salud y mana disminuye.`);
         if(this.health > 0){
@@ -48,6 +53,7 @@ export class Mage extends Character {
         }
     }
 
+    // Metodo recibirAtaqueConDefensa, cuando Character se defiende de los ataques de su oponente. 
     public recibirAtaqueConDefensa():void{
         console.log(`${this.name} es atacado pero se defiende con una burbuja magica y no afecta su salud ni su mana.`);
     }

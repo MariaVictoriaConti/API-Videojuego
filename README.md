@@ -1,7 +1,15 @@
 # 🕹️ API VIDEOJUEGO 🕹️
 
 ### Introducción
-En este proyecto se presenta una simulación del juego "Mario Bros." basado en el paradigma de programación orientada a objetos. El lenguaje utilizado es TypeScript y el modelo aplicado es el patrón MVC.
+Este proyecto se presenta como una simulación del juego "Super Mario Bros" tomando como base de programación el paradigma de programación orientada a objetos. Se basa en crear un personaje (Mario o Luigi) quienes deben cumplir diferentes misiones donde combaten contra enemigos para lograr pasar de nivel y recibir una recompensa. 
+
+El proyecto fue desarrollado por Maria Victoria Conti, Paula Laurnagaray  y Sofía Sachetti. Se trabajó de manera colaborativa utilizando el control de versiones de Git y guardando el desarrollo en un repositorio remoto de Github. 
+
+### Tecnologías utilizadas
+- TypeScript
+- Node.js
+- Git
+- GitHub
 
 ### Instalaciones
 Antes de iniciar el programa, se deben realizar las siguientes instalaciones en consola para poder ejecutar el codigo.
@@ -16,7 +24,7 @@ Para inicializar el programa, colocar en la terminal de GitBash: `npm start`.
 Una vez inicializado, posicionarse en la siguiente ruta: scr/config/ y ejecutar `npx ts-node index.ts`. Con ese comando se derá comienzo a la simulación del juego. 
 
 ## 🍄 Simulación del juego 
-El programa ya se presenta con una simulación establecida que permite mostrar cómo es el funcionamiento de la aplicación. De todas formas, la simulación puede ser modificada a gusto del usuario, ya que cuenta con las funciones de crear personajes y asignarle misiones. 
+El programa ya se presenta con una simulación establecida que permite mostrar cómo es el funcionamiento de la aplicación. De todas formas, la simulación puede ser modificada a gusto del usuario, ya que cuenta con las funciones de crear personajes y asignarle poderes y misiones. 
 
 ### Personaje 
 Es el personaje principal del juego y quien va a enfrentarse al enemigo y cumplir con las misiones. Cuenta con nombre, nivel, salud, experiencia, inventario y lista de misiones. 
@@ -37,9 +45,9 @@ Son las tareas a completar que se le asignan al personaje. Se divide en 3: Main,
 * Tipo de misión: las misiones se dividen entre Main, Side o Event. Cada una cuenta con características diferentes. 
 
 ### Enemy
-Es el contrincante a quien se enfrenta el Personaje principal. Cambia según las misiones y puede enviar ataques hacia el personaje y afectar su salud, así como también puede recibir ataques y defenderse. Es derrotado cuando su salud llega a 0 se da por finalizada la misión.
+Es el contrincante a quien se enfrenta el Personaje principal. Cambia según las misiones y puede enviar ataques hacia el personaje y afectar su salud, así como también puede recibir ataques y defenderse. Es derrotado cuando su salud llega a 0, ahi es cuando se da por finalizada la misión.
 
-### Mago y Warrior
+### Mage y Warrior
 Son personajes que aparecen de forma sorpresiva durante las misiones y ayudan al personaje. En el caso de Mage, ayuda a aumentar la salud con un hechizo. En caso de Warrior, le enseña al personaje una nueva forma de ataque y le obsequia un nuevo poder para su inventario. 
 
 ## Ejemplos de uso
@@ -68,3 +76,8 @@ La segnda forma de asignar una misión es con la función asignarMultiplesMision
 
 ### Ver lista de misiones
 Para saber cuales son las misiones que un personaje tiene asignadas y aun sin completar se puede utilizar la función listarMisiones, pasando como parámetro el nombre del personaje que se desea consultar. Por ejemplo: `listarMisiones('Mario')`, que devolverá una lista de las misiones que el personaje 'Mario' debe completar.
+
+## Comentario final
+Al comenzar el desarrolo del videojuego decidimos encararlo en base al famoso juego Super Mario Bros teniendo en cuenta su modalidad y personajes pero ajustandolo a lo que se pedia en la consigna. Durante el proceso, nos dimos cuenta que estabamos enfocando el desarrolo en hacer un video juego real, donde los usuarios pudieran interactuar entre personaje elegido y enemigos, pero nos estabamos alejando del punto centran en la consigna que era la de realizar una SIMULACION de videojuego. 
+
+Por esto, decidimos implementar otra metodologia que fue usar un Math random que al ejecutar el programa realice diferentes tipos de combates, dando asi tambien diferentes resultados. Alli tambien incluimos los diferentes tipos de eventos sorpresa y apariciones de personajes especiales en el juego (el Warrior y el Mage que derivan de la clase Character). De esta manera conseguimos desarrollar una simulacion de Videojuego dinamica y entretenida. Aplicamos el patron de diseño MVC donde podemos ver de manera modularizada las diferentes partes que componen el videojuego. Estamos satisfechas con el producto final pero pensamos que siempre puede mejorarse y esperamos que disfruten del resultado como nosotras.

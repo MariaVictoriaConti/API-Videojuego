@@ -1,3 +1,4 @@
+// Importamos los modulos
 import { Character } from "../models/Character";
 import { Enemy } from "../models/Enemy";
 import { triggerEvent } from "../controllers/gameController";
@@ -28,27 +29,12 @@ export async function combate(personaje: Character, enemigo: Enemy): Promise<voi
     }
 }
 
-// Eventos sopresa
+// Funcion para sumar salud. Se usa en eventos sorpresa
 export function sumar10Salud(personaje: Character): void {
     personaje.health += 10
 }
 
-// export async function evento(personaje: Character): Promise<string> {
-//     return new Promise((resolve) => {
-//         const MageSorpresa = new Mage("Mage");
-//         const WarriorSorpresa = new Warrior("Warrior", SUPERPODER.LANZAFUEGO, DEFENSA.CAPARAZONPROTECTOR);
-//         const evento = Math.random() > 0.5 ? '🍄 Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.' : '💥 Recibiste un ataque extra-fuerte, tu salud se ha reducido en 20.';
-//         if (evento === '🍄 Atrapaste el hongo! Tu recompensa es de 10 puntos de vida.') {
-//             sumar10Salud(personaje)
-//             console.log(`Su salud es de: ${personaje.health}`);
-//         } else {
-//             personaje.health -= 20
-//             console.log(`Su salud es de: ${personaje.health}`);
-//         }
-//         setInterval(() => resolve(evento), 1000)
-//     })
-// }
-
+// Evento sorpresa. Funcion que ejecuta un evento al azar en medio del combate
 export async function evento2(personaje: Character): Promise<string> {
     return new Promise((resolve) => {
         const MageSorpresa = new Mage("Mage");
@@ -71,7 +57,7 @@ export async function evento2(personaje: Character): Promise<string> {
             if (encounter instanceof Mage) {
                 personaje.health += MageSorpresa.poderMagico
                 evento = `🧙‍♂️ Te encontraste con un mago! Te dio un hechizo que aumenta tu salud a ${personaje.health}.`;
-             } else {
+            } else {
                 evento = `🛡️ Te encontraste con un guerrero! Te enseñó una nueva técnica de combate. Ahora tienes un nuevo superPoder en tu inventario de poderes.`;
                 if(!personaje._inventory.includes(WarriorSorpresa.superPoder)){
                 personaje._inventory.push(WarriorSorpresa.superPoder);}

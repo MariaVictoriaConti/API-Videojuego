@@ -1,3 +1,4 @@
+// Creación clase Enemigo
 export class Enemy {
     private _name: string;
     private _poder: string;
@@ -11,6 +12,7 @@ export class Enemy {
         this._defense = defense;
     }
 
+    // Métodos getter y setter de la clase
     public get name(): string {
         return this._name
     }
@@ -42,6 +44,7 @@ export class Enemy {
         this._defense = value;
     }
 
+// Metodo atacarContrincante: con cada ataque que realiza, pierde puntos de health.
     public atacarContrincante(): void {
         console.log(`\n💣 ${this.name} ataca...`);
         this._health -= 20
@@ -52,6 +55,7 @@ export class Enemy {
         }
     }
 
+// Metodo recibirAtaqueSinDefensa, cuando Character es atacado desprevenido. Resta más puntos de health.
     public recibirAtaqueSinDefensa(): void {
         if (this.health < 29) {
             this._health -= 30
@@ -63,6 +67,7 @@ export class Enemy {
         }
     }
 
+    // Metodo recibirAtaqueConDefensa, cuando Character se defiende de los ataques de su oponente. 
     public recibirAtaqueConDefensa(): void {
         if (this._health >= 0) {
             console.log(`🛡️  ${this.name} es atacado pero se defiende y no afecta su salud.`);
